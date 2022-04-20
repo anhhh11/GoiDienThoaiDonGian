@@ -99,7 +99,7 @@ class _DialPadState extends State<DialPad> {
           child: Container(
             height: 80,
             width: double.infinity,
-            color: const Color(0xFF2d79e6),
+            color: const Color(0xFF4CD04C),
             child: const Center(
               child: Icon(
                 Icons.call,
