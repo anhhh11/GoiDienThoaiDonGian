@@ -113,6 +113,9 @@ class _DialPadState extends State<DialPad> {
           onTap: () async {
             SystemSound.play(SystemSoundType.click);
             FlutterPhoneDirectCaller.callNumber(display);
+            setState(() {
+              display = "";
+            });
           },
         )
       ],
@@ -146,5 +149,4 @@ class _DialPadState extends State<DialPad> {
       ),
     );
   }
-
 }
