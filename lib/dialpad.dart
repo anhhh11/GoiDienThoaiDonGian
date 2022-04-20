@@ -16,9 +16,7 @@ class _DialPadState extends State<DialPad> with WidgetsBindingObserver {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery
-        .of(context)
-        .size;
+    var size = MediaQuery.of(context).size;
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -134,7 +132,7 @@ class _DialPadState extends State<DialPad> with WidgetsBindingObserver {
         height: size.height * 0.15,
         width: size.width * 0.33,
         decoration:
-        BoxDecoration(border: Border.all(color: Colors.grey, width: 0.025)),
+            BoxDecoration(border: Border.all(color: Colors.grey, width: 0.025)),
         child: Center(
           child: Text(
             value,
@@ -160,7 +158,7 @@ class _DialPadState extends State<DialPad> with WidgetsBindingObserver {
         break;
       case AppLifecycleState.paused:
         print("app in paused");
-        exit(0);
+        SystemChannels.platform.invokeMethod('SystemNavigator.pop');
         break;
       case AppLifecycleState.detached:
         print("app in detached");
