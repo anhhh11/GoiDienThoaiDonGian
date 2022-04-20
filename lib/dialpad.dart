@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:flutter/services.dart';
@@ -9,12 +11,14 @@ class DialPad extends StatefulWidget {
   _DialPadState createState() => _DialPadState();
 }
 
-class _DialPadState extends State<DialPad> {
+class _DialPadState extends State<DialPad> with WidgetsBindingObserver {
   String display = '';
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    var size = MediaQuery
+        .of(context)
+        .size;
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -130,7 +134,7 @@ class _DialPadState extends State<DialPad> {
         height: size.height * 0.15,
         width: size.width * 0.33,
         decoration:
-            BoxDecoration(border: Border.all(color: Colors.grey, width: 0.025)),
+        BoxDecoration(border: Border.all(color: Colors.grey, width: 0.025)),
         child: Center(
           child: Text(
             value,
@@ -143,5 +147,24 @@ class _DialPadState extends State<DialPad> {
         ),
       ),
     );
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        print("app in resumed");
+        break;
+      case AppLifecycleState.inactive:
+        print("app in inactive");
+        break;
+      case AppLifecycleState.paused:
+        print("app in paused");
+        exit(0);
+        break;
+      case AppLifecycleState.detached:
+        print("app in detached");
+        break;
+    }
   }
 }
