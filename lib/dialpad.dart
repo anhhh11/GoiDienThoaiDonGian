@@ -11,7 +11,7 @@ class DialPad extends StatefulWidget {
   _DialPadState createState() => _DialPadState();
 }
 
-class _DialPadState extends State<DialPad> with WidgetsBindingObserver {
+class _DialPadState extends State<DialPad> {
   String display = '';
 
   @override
@@ -147,22 +147,4 @@ class _DialPadState extends State<DialPad> with WidgetsBindingObserver {
     );
   }
 
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) {
-    switch (state) {
-      case AppLifecycleState.resumed:
-        print("app in resumed");
-        break;
-      case AppLifecycleState.inactive:
-        print("app in inactive");
-        break;
-      case AppLifecycleState.paused:
-        print("app in paused");
-        SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-        break;
-      case AppLifecycleState.detached:
-        print("app in detached");
-        break;
-    }
-  }
 }

@@ -6,7 +6,6 @@ import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'dialpad.dart';
 import 'package:flutter/services.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -42,7 +41,7 @@ class DisplayContact {
   const DisplayContact({this.name = '', this.phoneNumber = ''});
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   List<DisplayContact> contacts = [];
 
   void fetchContacts() async {
@@ -66,6 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance!.addObserver(this);
     fetchContacts();
   }
 
@@ -120,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               elevation: 2.0,
                               fillColor: Colors.green,
                               child: const Icon(Icons.call,
-                                  size: 24.0, color: Colors.white),
+                                  size: 32.0, color: Colors.white),
                               padding: const EdgeInsets.all(15.0),
                               shape: const CircleBorder(),
                             )
@@ -159,5 +159,30 @@ class _MyHomePageState extends State<MyHomePage> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance!.removeObserver(this);
+    super.dispose();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        debugPrint("app in resumed");
+        break;
+      case AppLifecycleState.inactive:
+        debugPrint("app in inactive");
+        break;
+      case AppLifecycleState.paused:
+        debugPrint("app in paused");
+        SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+        break;
+      case AppLifecycleState.detached:
+        debugPrint("app in detached");
+        break;
+    }
   }
 }
