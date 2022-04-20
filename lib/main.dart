@@ -4,7 +4,8 @@ import 'package:flutter/foundation.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'dialpad.dart';
-import 'package:flutter_vibrate/flutter_vibrate.dart';
+import 'package:flutter/services.dart';
+
 
 void main() {
   runApp(const MyApp());
@@ -69,7 +70,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   callNumber(String phoneNumber) async {
-    Vibrate.vibrate();
+    SystemSound.play(SystemSoundType.click);
     await FlutterPhoneDirectCaller.callNumber(phoneNumber);
   }
 

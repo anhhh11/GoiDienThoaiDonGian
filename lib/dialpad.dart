@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
-import 'package:flutter_vibrate/flutter_vibrate.dart';
+import 'package:flutter/services.dart';
 
 class DialPad extends StatefulWidget {
   const DialPad({Key? key}) : super(key: key);
@@ -43,7 +43,7 @@ class _DialPadState extends State<DialPad> {
                 children: [
                   InkWell(
                     onTap: () async {
-                      Vibrate.vibrate();
+                      SystemSound.play(SystemSoundType.click);
                       if (display.isNotEmpty) {
                         setState(() {
                           display = display.substring(0, display.length - 1);
@@ -109,6 +109,7 @@ class _DialPadState extends State<DialPad> {
             ),
           ),
           onTap: () async {
+            SystemSound.play(SystemSoundType.click);
             FlutterPhoneDirectCaller.callNumber(display);
           },
         )
@@ -120,7 +121,7 @@ class _DialPadState extends State<DialPad> {
     return InkWell(
       highlightColor: Colors.black45,
       onTap: () async {
-        Vibrate.vibrate();
+        SystemSound.play(SystemSoundType.click);
         setState(() {
           display = display + value;
         });
