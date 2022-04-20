@@ -104,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
                               child: Column(
                                 children: [
                                   Text(contacts[index].name,
-                                      style: const TextStyle(fontSize: 20)),
+                                      style: const TextStyle(fontSize: 24)),
                                   Text(contacts[index].phoneNumber)
                                 ],
                                 crossAxisAlignment: CrossAxisAlignment.start,
